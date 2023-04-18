@@ -1,36 +1,30 @@
 import React, {useState} from "react";
-import { View, Image, StyleSheet, useWindowDimensions } from "react-native";
+import { View, Image, StyleSheet, useWindowDimensions, ScrollView } from "react-native";
 import Logo from '../assets/travellogo.png';
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
+import SocialSignInButtons from "../components/SocialSignInButtons";
 
-export default function SignInScreen() {
+export default function SignInScreen({ navigation }) {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const onSignInPressed = () => {
-        console.warn("Sign in");
+        navigation.navigate('HomeScreen')
     }
 
     const onForgotPasswordPressed = () => {
-        console.warn("Forgot password pressed");
+        navigation.navigate('ForgotPasswordScreen')
     }
 
-    const onSignInFacebook = () => {
-        console.warn("onSignInFacebook");
-    }
-
-    const onSignInGoogle = () => {
-        console.warn("onSignInGoogle");
-    }
-
-    const onSignInApple = () => {
-        console.warn("onSignInApple");
+    const onSignUpPressed = () => {
+        navigation.navigate('SignUpScreen')
     }
 
     const {height} = useWindowDimensions();
     
     return(
+        <ScrollView style={styles.scroll_root} showsVerticalScrollIndicator={false}>
         <View style={styles.root}>
             <Image source={Logo} style={[styles.logo, {height: height*0.3}]} resizeMode="contain"></Image>
             <CustomInput placeholder="Username" value={username} setValue={setUsername} />
@@ -38,18 +32,24 @@ export default function SignInScreen() {
             <CustomButton text="Sign In" onPress={onSignInPressed} />
             <CustomButton text="Forgot Password?" onPress={onForgotPasswordPressed} type="TERTIARY"/>
 
-            <CustomButton text="Sign In with Facebook" onPress={onSignInFacebook} />
-            <CustomButton text="Sign In with Google" onPress={onSignInGoogle} />
-            <CustomButton text="Sign In with Apple" onPress={onSignInApple} />
+            <SocialSignInButtons></SocialSignInButtons>
+
+            <CustomButton text="Don't have an Account? Sign In" onPress={onSignUpPressed} type="TERTIARY"/>
         </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
+    scroll_root: {
+        flex: 1,
+        backgroundColor: 'white'
+    },
     root: {
         alignItems: 'center',
         padding: 20,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        flex: 1
     },
     logo: {
         width: '70%',

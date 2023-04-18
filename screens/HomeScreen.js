@@ -139,7 +139,7 @@ const HomeScreen = ({navigation}) => {
           </View>
         </View>
         <ListCategories />
-        <Text style={style.sectionTitle}>Places</Text>
+        <Text style={style.sectionTitle}>Your Trips</Text>
         <View>
           <FlatList
             contentContainerStyle={{paddingLeft: 20}}

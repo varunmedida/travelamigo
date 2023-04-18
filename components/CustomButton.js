@@ -5,8 +5,17 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 export default function CustomButton({onPress, text, type = "PRIMARY",
 bgColor, fgColor}) {
     return (
-        <Pressable onPress={onPress} style={[styles.container, styles[`container_${type}`]]}>
-            <Text style={[styles.text, styles[`text_${type}`]]}>{text}</Text>
+        <Pressable onPress={onPress} 
+        style={[styles.container, 
+        styles[`container_${type}`],
+        bgColor ? {backgroundColor: bgColor} : {}
+        ]}>
+            <Text 
+            style={[
+                styles.text, 
+                styles[`text_${type}`],
+                fgColor ? {color: fgColor} : {}
+                ]}>{text}</Text>
         </Pressable>
     );
 };
@@ -26,6 +35,12 @@ const styles = StyleSheet.create({
 
     },
 
+    container_SECONDARY: {
+        borderColor: '#3B71FE',
+        borderWidth: 2,
+
+    },
+
     container_TERTIARY: {
 
     },
@@ -35,5 +50,8 @@ const styles = StyleSheet.create({
     },
     text_TERTIARY: {
         color: 'grey'
+    },
+    text_SECONDARY: {
+        color: '#3B71FE'
     }
 });
