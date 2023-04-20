@@ -12,6 +12,11 @@ import COLORS from '../const/colors';
 
 const DetailsScreen = ({navigation, route}) => {
   const place = route.params;
+
+  const onViewChecklistPressed = () => {
+    navigation.navigate('ChecklistScreen')
+  }
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
       <StatusBar translucent backgroundColor="rgba(0,0,0,0)" />
@@ -40,7 +45,7 @@ const DetailsScreen = ({navigation, route}) => {
             <Icon name="star" size={30} color={COLORS.orange} />
             <Text
               style={{color: COLORS.white, fontWeight: 'bold', fontSize: 20}}>
-              5.0
+              5/5/2023
             </Text>
           </View>
         </View>
@@ -68,28 +73,17 @@ const DetailsScreen = ({navigation, route}) => {
       </View>
       <View style={style.footer}>
         <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-          <Text
-            style={{
-              fontSize: 18,
-              fontWeight: 'bold',
-              color: COLORS.white,
-            }}>
-            $100
-          </Text>
-          <Text
-            style={{
-              fontSize: 12,
-              fontWeight: 'bold',
-              color: COLORS.grey,
-              marginLeft: 2,
-            }}>
-            /PER DAY
+        <View style={style.bookNowBtn}>
+          <Text onPress={onViewChecklistPressed}
+            style={{color: COLORS.primary, fontSize: 16, fontWeight: 'bold'}}>
+            Weather
           </Text>
         </View>
+        </View>
         <View style={style.bookNowBtn}>
-          <Text
+          <Text onPress={onViewChecklistPressed}
             style={{color: COLORS.primary, fontSize: 16, fontWeight: 'bold'}}>
-            Create Trip
+            View Checklist
           </Text>
         </View>
       </View>

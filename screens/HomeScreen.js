@@ -19,15 +19,18 @@ const {width} = Dimensions.get('screen');
 
 
 const HomeScreen = ({navigation}) => {
+
+  const onAddTripPressed = () => {
+    navigation.navigate('AddTripScreen')
+}
+
   const categoryIcons = [
-    <Icon name="flight" size={25} color={COLORS.primary} />,
-    <Icon name="beach-access" size={25} color={COLORS.primary} />,
-    <Icon name="near-me" size={25} color={COLORS.primary} />,
-    <Icon name="place" size={25} color={COLORS.primary} />,
+    <Icon name="add" size={25} color={COLORS.primary} onPress={onAddTripPressed}/>,
   ];
   const ListCategories = () => {
     return (
       <View style={style.categoryContainer}>
+      <Text style={style.sectionTitle}>Upcoming Trips</Text>
         {categoryIcons.map((icon, index) => (
           <View key={index} style={style.iconContainer}>
             {icon}
@@ -66,8 +69,8 @@ const HomeScreen = ({navigation}) => {
               </Text>
             </View>
             <View style={{flexDirection: 'row'}}>
-              <Icon name="star" size={20} color={COLORS.white} />
-              <Text style={{marginLeft: 5, color: COLORS.white}}>5.0</Text>
+              <Icon name="event" size={20} color={COLORS.white} />
+              <Text style={{marginLeft: 5, color: COLORS.white}}>5/5</Text>
             </View>
           </View>
         </ImageBackground>
@@ -139,7 +142,6 @@ const HomeScreen = ({navigation}) => {
           </View>
         </View>
         <ListCategories />
-        <Text style={style.sectionTitle}>Your Trips</Text>
         <View>
           <FlatList
             contentContainerStyle={{paddingLeft: 20}}

@@ -10,6 +10,8 @@ import SignUpScreen from './screens/SignUpScreen';
 import ConfirmEmailScreen from './screens/ConfirmEmailScreen';
 import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
 import NewPasswordScreen from './screens/NewPasswordScreen';
+import ChecklistScreen from './screens/ChecklistScreen';
+import AddTripScreen from './screens/AddTripScreen';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +27,8 @@ export default function App() {
         <Stack.Screen name="ConfirmEmailScreen" component={ConfirmEmailScreen} />
         <Stack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen} />
         <Stack.Screen name="NewPasswordScreen" component={NewPasswordScreen} />
+        <Stack.Screen name="ChecklistScreen" component={ChecklistScreen} />
+        <Stack.Screen name="AddTripScreen" component={AddTripScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
