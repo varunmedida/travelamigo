@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Switch } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Switch, Alert } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { doc, setDoc , addDoc, collection} from "firebase/firestore"; 
+import { db } from '../firebase';
 
-const AddTripScreen = () => {
+const AddTripScreen = ({navigation}) => {
   const [tripName, setTripName] = useState('');
   const [destination, setDestination] = useState('');
   const [startDate, setStartDate] = useState(new Date());
@@ -13,7 +15,21 @@ const AddTripScreen = () => {
 
   const handleSaveTrip = () => {
     // Handle saving trip to database or local storage
-    console.warn(`Saved trip: ${tripName} to ${destination}, from ${startDate.toISOString()} to ${endDate.toISOString()}`);
+    addDoc(collection(db, "trips"), {
+      tripName: tripName,
+      destination: destination,
+      startDate: startDate,
+      isGroupTrip: isGroupTrip
+    }).then(() => {
+      Alert.alert('Trip Saved', 'Trip Details Saved' , [
+        {text: 'OK', onPress: () => navigation.navigate('HomeScreen')},
+      ]);
+    }
+    ).catch(() => {
+      Alert.alert('Error', 'Error Saving Trip Details. Please try again.' , [
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ]);
+    });
   };
 
   const handleStartDateChange = (event, selectedDate) => {

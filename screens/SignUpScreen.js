@@ -1,8 +1,9 @@
 import React, {useState} from "react";
-import { View, Image, StyleSheet, useWindowDimensions, ScrollView, Text } from "react-native";
+import { View, Image, StyleSheet, useWindowDimensions, ScrollView, Text , Alert} from "react-native";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
-import SocialSignInButtons from "../components/SocialSignInButtons";
+import { authentication } from "../firebase";
+import {createUserWithEmailAndPassword} from "firebase/auth";
 
 export default function SignUpScreen({ navigation }) {
 
@@ -12,7 +13,17 @@ export default function SignUpScreen({ navigation }) {
     const [passwordRepeat, setPasswordRepeat] = useState('');
 
     const onRegisterPressed = () => {
-        navigation.navigate('ConfirmEmailScreen')
+       createUserWithEmailAndPassword(authentication, email, password)
+       .then((result) => {
+        console.log(result.email)
+        navigation.navigate('SignInScreen')
+       })
+       .catch((result) => {
+        Alert.alert('Error', 'Error creating account' , [
+            {text: 'OK', onPress: () => console.log('OK Pressed')},
+          ]);
+       })
+        // 
     }
 
     const onSignInPress = () => {
@@ -44,8 +55,6 @@ export default function SignUpScreen({ navigation }) {
             <Text style= {styles.text}>By registering, you confirm that you accept our{' '} 
             <Text style= {styles.link} onPress={onTermsOfUsePressed}>Terms of use</Text> and 
             <Text style= {styles.link} onPress={onPrivacyPolicyPressed}>Privacy Policy</Text></Text>
-
-            <SocialSignInButtons></SocialSignInButtons>
 
             <CustomButton text="Have an Account? Sign In" onPress={onSignInPress} type="TERTIARY"/>
         </View>

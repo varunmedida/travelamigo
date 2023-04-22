@@ -1,16 +1,31 @@
 import React, {useState} from "react";
-import { View, Image, StyleSheet, useWindowDimensions, ScrollView } from "react-native";
+import { View, Image, StyleSheet, useWindowDimensions, ScrollView , Alert} from "react-native";
 import Logo from '../assets/travellogo.png';
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 import SocialSignInButtons from "../components/SocialSignInButtons";
+import { authentication } from "../firebase";
+import {signInWithEmailAndPassword} from "firebase/auth";
 
 export default function SignInScreen({ navigation }) {
 
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const onSignInPressed = () => {
-        navigation.navigate('HomeScreen')
+        signInWithEmailAndPassword(authentication,email,password)
+        .then((userCredentials) => {
+            navigation.navigate('HomeScreen')
+        })
+        .catch((error) => {
+            Alert.alert('Invalid Credentials', 'Invalid Credentials', [
+                {
+                  text: 'Cancel',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel',
+                },
+                {text: 'OK', onPress: () => console.log('OK Pressed')},
+              ]);
+        })
     }
 
     const onForgotPasswordPressed = () => {
@@ -27,7 +42,7 @@ export default function SignInScreen({ navigation }) {
         <ScrollView style={styles.scroll_root} showsVerticalScrollIndicator={false}>
         <View style={styles.root}>
             <Image source={Logo} style={[styles.logo, {height: height*0.3}]} resizeMode="contain"></Image>
-            <CustomInput placeholder="Username" value={username} setValue={setUsername} />
+            <CustomInput placeholder="Email" value={email} setValue={setEmail} />
             <CustomInput placeholder="Password" value={password} setValue={setPassword} secureTextEntry/>
             <CustomButton text="Sign In" onPress={onSignInPressed} />
             <CustomButton text="Forgot Password?" onPress={onForgotPasswordPressed} type="TERTIARY"/>
