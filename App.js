@@ -12,6 +12,7 @@ import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
 import NewPasswordScreen from './screens/NewPasswordScreen';
 import ChecklistScreen from './screens/ChecklistScreen';
 import AddTripScreen from './screens/AddTripScreen';
+import WeatherScreen from './screens/WeatherScreen';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,7 @@ export default function App() {
         <Stack.Screen name="NewPasswordScreen" component={NewPasswordScreen} />
         <Stack.Screen name="ChecklistScreen" component={ChecklistScreen} />
         <Stack.Screen name="AddTripScreen" component={AddTripScreen} />
+        <Stack.Screen name="WeatherScreen" component={WeatherScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -12,6 +12,7 @@ export default function SignInScreen({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const onSignInPressed = () => {
+        // navigation.navigate('HomeScreen')
         signInWithEmailAndPassword(authentication,email,password)
         .then((userCredentials) => {
             navigation.navigate('HomeScreen')
@@ -45,7 +46,7 @@ export default function SignInScreen({ navigation }) {
             <CustomInput placeholder="Email" value={email} setValue={setEmail} />
             <CustomInput placeholder="Password" value={password} setValue={setPassword} secureTextEntry/>
             <CustomButton text="Sign In" onPress={onSignInPressed} />
-            <CustomButton text="Forgot Password?" onPress={onForgotPasswordPressed} type="TERTIARY"/>
+            {/* <CustomButton text="Forgot Password?" onPress={onForgotPasswordPressed} type="TERTIARY"/> */}
 
             <SocialSignInButtons></SocialSignInButtons>
 

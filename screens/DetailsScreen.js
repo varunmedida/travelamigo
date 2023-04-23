@@ -17,6 +17,10 @@ const DetailsScreen = ({navigation, route}) => {
     navigation.navigate('ChecklistScreen')
   }
 
+  const onWeatherPressed = () => {
+    navigation.navigate('WeatherScreen')
+  }
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
       <StatusBar translucent backgroundColor="rgba(0,0,0,0)" />
@@ -74,7 +78,7 @@ const DetailsScreen = ({navigation, route}) => {
       <View style={style.footer}>
         <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
         <View style={style.bookNowBtn}>
-          <Text onPress={onViewChecklistPressed}
+          <Text onPress={onWeatherPressed}
             style={{color: COLORS.primary, fontSize: 16, fontWeight: 'bold'}}>
             Weather
           </Text>
